@@ -446,4 +446,12 @@ body {
  .gpt-search-box input{
     width: 200px;
   }
+
+  .gpt-search-box{
+    top: 160px;
+  }
+
+  .response-box {
+  top: 200px;
+}
 }
