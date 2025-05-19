@@ -1,0 +1,434 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  font-family: sans-serif;
+}
+
+:root {
+  --netflix-color: #e50914;
+}
+
+/* utils */
+
+.container {
+  max-width: 1080px;
+  margin-inline: auto;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+/* log-in */
+
+.log-in {
+  position: relative;
+  height: 100vh;
+  background-size: cover;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.651) 30%,
+      rgba(0, 0, 0, 0)
+    ),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/202ac35e-1fca-44f0-98d9-ea7e8211a07c/web/IN-en-20250512-TRIFECTA-perspective_688b8c03-78cb-46a6-ac1c-1035536f871a_small.jpg");
+}
+
+.log-in-header img {
+  width: 150px;
+}
+
+.log-in-form {
+  width: 350px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 60px 50px;
+  padding-bottom: 100px;
+  background-color: rgba(0, 0, 0, 0.664);
+  border-radius: 10px;
+}
+
+.log-in-form h1 {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.log-in-form input {
+  background-color: #1f263463;
+  padding: 10px;
+  border-radius: 5px;
+  border: 0.5px solid white;
+  color: white;
+  caret-color: white;
+  margin-top: 15px;
+}
+
+.log-in-form button {
+  background-color: var(--netflix-color);
+  color: white;
+  padding-block: 6px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.log-in-form p {
+  margin: 0;
+  color: var(--netflix-color);
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+#log-on-para {
+  margin-top: 30px;
+  color: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+/* browse */
+
+.browse {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.651) 20%,
+    rgba(0, 0, 0, 0)
+  );
+  width: 100%;
+}
+
+.browse-header {
+  background-image: linear-gradient(
+    to bottom,
+    rgb(0, 0, 0) 30%,
+    rgba(0, 0, 0, 0)
+  );
+  margin-inline: auto;
+  position: fixed;
+  z-index: 15;
+  justify-content: space-between;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.548);
+  backdrop-filter: blur(5px); /* the blur effect */
+  -webkit-backdrop-filter: blur(5px); /* for Safari support */
+}
+
+.browse-header img {
+  width: 150px;
+}
+
+.browse-header-right {
+  margin-right: 20px;
+  column-gap: 10px;
+  color: white;
+}
+
+.browse-header-right img {
+  width: 30px;
+}
+
+.gpt-btn {
+  margin-inline: 20px;
+}
+
+.browse-header-right button {
+  cursor: pointer;
+  background-color: var(--netflix-color);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 10px;
+}
+
+/* home page title */
+
+.top-title {
+  width: 100%;
+  height: 90dvh;
+  overflow: hidden;
+  position: relative;
+}
+
+.title {
+  width: 100%;
+  z-index: 10;
+  position: absolute;
+  top: 30%;
+  left: 3%;
+  max-width: 400px;
+}
+
+.title-info img {
+  max-width: 80%;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.title-info h1 {
+  font-size: 0.8rem;
+  color: white;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.video-bg {
+  position: absolute;
+  width: 100%;
+  height: fit-content;
+  z-index: -1;
+  /* top: -30px; */
+  left: 0;
+  overflow: hidden;
+}
+
+.video-bg iframe {
+  margin-top: -200px;
+  margin-left: -200px;
+  width: 2000px;
+  height: 150vh;
+}
+
+.video-gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.5) 30%,
+    rgba(0, 0, 0, 0) 100%
+  );
+
+  pointer-events: none; /* Makes sure it doesn't block clicks */
+  z-index: 20;
+}
+
+.title-btn-play {
+  padding: 10px 30px;
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.title-btn-play:hover {
+  background-color: rgb(124, 124, 124);
+  color: white;
+}
+
+.title-btn-more-info {
+  padding: 10px 30px;
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+.title-btn-more-info:hover {
+  background-color: rgb(43, 43, 43);
+}
+
+/* movie-box */
+
+.movie-slide-container {
+  position: relative;
+}
+
+.movie-slide {
+  width: 100%;
+  overflow-x: auto;
+  padding: 20px 50px;
+}
+
+.movie-slide button {
+  position: absolute;
+  height: 100%;
+  backdrop-filter: blur(10px); /* the blur effect */
+  -webkit-backdrop-filter: blur(5px); /* for Safari support */
+  padding-inline: 15px;
+  top: 0;
+}
+
+.poster-left-btn {
+  background-image: linear-gradient(to right, black, rgba(0, 0, 0, 0));
+  left: 0;
+}
+
+.poster-right-btn {
+  background-image: linear-gradient(to left, black, rgba(0, 0, 0, 0));
+
+  right: 0;
+}
+
+.movie-slide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.movie-slide h1 {
+  text-transform: capitalize;
+}
+
+.movie-poster img {
+  border-radius: 10px;
+  width: 100px;
+  margin-right: 100px;
+  cursor: pointer;
+}
+
+.main-movie-container {
+  color: white;
+  margin-top: -60px;
+}
+
+.movie-container {
+  background-color: rgba(0, 0, 0, 0.295);
+  backdrop-filter: blur(5px); /* the blur effect */
+  -webkit-backdrop-filter: blur(5px); /* for Safari support */
+}
+
+/* gpt */
+
+.gpt {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 100vh;
+  overflow-y: scroll;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.651) 30%,
+      rgba(0, 0, 0, 0)
+    ),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/202ac35e-1fca-44f0-98d9-ea7e8211a07c/web/IN-en-20250512-TRIFECTA-perspective_688b8c03-78cb-46a6-ac1c-1035536f871a_small.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.gpt-search-box {
+  position: absolute;
+  top: 140px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.gpt-search-box input {
+  width: 500px;
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+}
+
+.gpt-search-box button {
+  cursor: pointer;
+  background-color: var(--netflix-color);
+  color: white;
+  padding: 10px 20px;
+}
+
+.response-box {
+  height: fit-content;
+  position: absolute;
+  top: 180px;
+  color: white;
+}
+
+.gpt-movie-container {
+  margin-top: 20px;
+  margin-inline: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+  background-color: rgba(0, 0, 0, 0.76);
+  backdrop-filter: blur(5px); /* the blur effect */
+  -webkit-backdrop-filter: blur(5px); /* for Safari support */
+  border-radius: 10px;
+  padding: 20px 50px;
+  align-items: stretch;
+  justify-content: space-evenly;
+}
+
+.gpt-movie-card {
+  cursor: pointer;
+}
+
+.gpt-movie-card h2 {
+  font-size: 1rem;
+}
+
+.gpt-movie-card img {
+  width: 200px;
+}
+
+@media (max-width: 640px) {
+  .video-bg iframe {
+    margin-top: -200px;
+    margin-left: -700px;
+    width: 2000px;
+    height: 150vh;
+  }
+
+  .gpt-search-box input{
+    width: 350px;
+  }
+}
+
+@media (max-width: 520px) {
+  .browse-header {
+    flex-direction: column;
+    padding-block: 10px 20px;
+  }
+
+  .top-title {
+  width: 100%;
+  height: 80dvh;
+  overflow: hidden;
+  position: relative;
+}
+
+   .video-bg iframe {
+    margin-top: -80px;
+    margin-left: -700px;
+    width: 2000px;
+    height: 100vh;
+  }
+
+  .title {
+   
+    top: 40%;
+    left: 7%;
+    max-width: 250px;
+  }
+
+  .title-btn-play {
+  padding: 10px 30px;
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+
+
+.title-btn-more-info {
+  padding: 10px 30px;
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+ .gpt-search-box input{
+    width: 200px;
+  }
+}
