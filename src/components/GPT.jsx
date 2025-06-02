@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addGptArray } from "../utils/gptSlice";
 import GptMovieBox from "./GptMovieBox";
@@ -7,59 +7,58 @@ import GptMovieBox from "./GptMovieBox";
 const GPT = () => {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleSearch = async () => {
     if (!query.trim()) return;
 
     setLoading(true);
-  
+
+    const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+    const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
+    // Combine instructions and user input into one message
+    const prompt = `
+You are a movie recommendation engine.
+Always return exactly 5 movie names based on the user's input.
+Only return the movie names, strictly comma-separated, with no numbering or extra text.
+Example format: Movie 1, Movie 2, Movie 3, Movie 4, Movie 5
+
+User query: ${query}
+    `.trim();
 
     try {
       const res = await axios.post(
-        "https://api.groq.com/openai/v1/chat/completions",
+        url,
         {
-          model: "llama3-70b-8192",
-          messages: [
-            {
-              role: "system",
-              content: `You are a movie recommendation engine. 
-Always return exactly 5 movie names based on the user's input.
-Only return the movie names, strictly comma-separated, with no numbering or extra text. 
-Example format: Movie 1, Movie 2, Movie 3, Movie 4, Movie 5`,
-            },
+          contents: [
             {
               role: "user",
-              content: query,
+              parts: [{ text: prompt }],
             },
           ],
         },
         {
           headers: {
-            Authorization: `Bearer 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`, // ← Replace this
             "Content-Type": "application/json",
           },
         }
       );
 
-      const reply = res.data.choices[0].message.content;
-      const movieArray = reply.split(",").map((item) => item.trim());
+      const reply = res.data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+      const movieArray = reply.split(",").map((m) => m.trim());
 
-      console.log(movieArray);
-      dispatch(addGptArray(movieArray))
-      
+      console.log("Gemini response:", movieArray);
+      dispatch(addGptArray(movieArray));
     } catch (error) {
-      console.error("Error from Groq:", error);
-      
+      console.error("Gemini error:", error.response || error.message);
     }
 
     setLoading(false);
   };
 
-
   return (
-    <div className="gpt ">
+    <div className="gpt">
       <div className="gpt-search-box">
         <input
           type="text"
@@ -67,10 +66,12 @@ Example format: Movie 1, Movie 2, Movie 3, Movie 4, Movie 5`,
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button onClick={handleSearch}>{loading ? 'GPT searching' : 'Search'}</button>
+        <button onClick={handleSearch} disabled={loading}>
+          {loading ? "GPT searching" : "Search"}
+        </button>
       </div>
       <div className="response-box">
-        <GptMovieBox/>
+        <GptMovieBox />
       </div>
     </div>
   );
